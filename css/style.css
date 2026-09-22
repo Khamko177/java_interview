@@ -35,7 +35,7 @@
   --radius-lg: 16px;
   --radius-full: 9999px;
   
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Thai', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -101,7 +101,47 @@ body {
 .header-meta {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+}
+
+/* Language Selector */
+.lang-selector-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 5px 12px;
+  transition: all 0.2s;
+}
+
+.lang-selector-box:hover {
+  border-color: var(--border-focus);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.lang-icon {
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+
+.lang-select {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+}
+
+.lang-select option {
+  background: #ffffff;
+  color: var(--text-primary);
 }
 
 .candidate-quick-info {
@@ -203,42 +243,155 @@ body {
   box-shadow: 0 0 0 3px var(--primary-ring);
 }
 
-/* Category Filter Bar */
-.filter-bar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 24px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: thin;
-}
-
-.filter-pill {
-  padding: 8px 16px;
-  border-radius: var(--radius-full);
+/* Assessment Section / Part Navigation Hub */
+.part-selector-wrapper {
+  background: var(--bg-card);
   border: 1px solid var(--border-light);
-  background: #ffffff;
-  color: var(--text-secondary);
-  font-family: inherit;
-  font-size: 0.88rem;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.2s;
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 24px;
   box-shadow: var(--shadow-sm);
 }
 
-.filter-pill:hover {
-  background: var(--bg-subtle);
-  border-color: #cbd5e1;
-  color: var(--text-primary);
+.part-selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.filter-pill.active {
-  background: var(--primary);
-  border-color: var(--primary);
+.part-selector-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.part-current-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eff6ff;
+  color: var(--primary);
+  border: 1px solid #bfdbfe;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.part-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.part-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  user-select: none;
+}
+
+.part-tab-num {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.part-tab-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.part-tab:hover {
+  border-color: #93c5fd;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+.part-tab.active {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border-color: #1d4ed8;
   color: #ffffff;
-  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
+}
+
+.part-tab.active .part-tab-num {
+  color: #bfdbfe;
+}
+
+.part-tab.active .part-tab-title {
+  color: #ffffff;
+}
+
+/* Original Question ID Badge */
+.badge-orig-id {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Results Hero Actions Box */
+.hero-actions-box {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-hero-retake {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-hero-retake:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: #ffffff;
+}
+
+.btn-hero-choose-part {
+  background: #ffffff;
+  color: #1e40af !important;
+  border: 1.5px solid #ffffff;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s;
+}
+
+.btn-hero-choose-part:hover {
+  background: #f0fdf4;
+  color: #15803d !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Question List Container */
